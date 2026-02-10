@@ -27,10 +27,9 @@ Il sito è strutturato per essere:
    npm install
 2. Avvia il server di sviluppo
    ```bash
-   npm install
+   npm run dev
 3. Apri http://localhost:3000 per vedere il riultato
 
 ## 📝 Roadmap
 - [x] Setup iniziale Next.js e Tailwind
 - [x] Configurazione Domain & Deploy su Vercel
-- [] 
