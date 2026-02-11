@@ -1,4 +1,11 @@
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lemon Trip",
+  description: "Something very acid is coming...",
+  robots: "noindex, nofollow", 
+};
 
 export default function Maintenance() {
   return (
