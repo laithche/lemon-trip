@@ -8,11 +8,6 @@ Questo è un sito vetrina costruito con Next.js, progettato per presentare le co
 - **Deployment:** [Vercel](https://vercel.com/)
 - **Linguaggio:** TypeScript
 
-## Struttura del Sito
-- `/` - Landing page (attualmente in manutenzione).
-- `/about` - Presentazione artigiani, il laboratorio e i contatti (IG & Email).
-- `/collections` - Gallery delle creazioni divise per collezioni.
-
 ## Sviluppo Locale
 1. Installa le dipendenze:
    ```bash
