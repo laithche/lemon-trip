@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Metadata } from "next";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "Lemon Trip",
@@ -23,9 +24,6 @@ export default function Maintenance() {
           <p className="text-xl text-gray-400">⚠ STAY TUNED ⚠</p>
         </div>
       </div>
-      <footer className="absolute bottom-10 text-gray-400 text-sm">
-        © 2026 Lemon Trip
-      </footer>
     </main>
   );
 }

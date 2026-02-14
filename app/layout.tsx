@@ -1,33 +1,37 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rajdhani, Roboto } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Configurazione dei font
+const rajdhani = Rajdhani({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rajdhani",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
-  title: "Lemon Trip",
-  description: "Underground handicraft.",
+  title: "Lemon Trip | Underground Clothing",
+  description: "Serigrafia artigianale in Sardegna",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    // QUI CI DEVONO ESSERE I TAG HTML E BODY
+    <html lang="it" className={`${rajdhani.variable} ${roboto.variable}`}>
+      <body className="antialiased font-roboto bg-white">
         {children}
+        <Footer />
       </body>
     </html>
   );
