@@ -3,7 +3,6 @@ import { Rajdhani, Roboto } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 
-// Configurazione dei font
 const rajdhani = Rajdhani({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -17,7 +16,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Lemon Trip | Underground Clothing",
+  title: "Lemon Trip | Underground Handicraft",
   description: "Serigrafia artigianale in Sardegna",
 };
 
@@ -27,10 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // QUI CI DEVONO ESSERE I TAG HTML E BODY
     <html lang="it" className={`${rajdhani.variable} ${roboto.variable}`}>
-      <body className="antialiased font-roboto bg-white">
-        {children}
+      
+      <body className="antialiased bg-circuit-pattern min-h-screen flex flex-col">
+        <main className="grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
