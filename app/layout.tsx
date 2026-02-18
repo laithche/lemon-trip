@@ -1,33 +1,40 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rajdhani, Roboto } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const rajdhani = Rajdhani({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rajdhani",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
-  title: "Lemon Trip",
-  description: "Underground handicraft.",
+  title: "Lemon Trip | Underground Handicraft",
+  description: "Serigrafia artigianale in Sardegna",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="it" className={`${rajdhani.variable} ${roboto.variable}`}>
+      
+      <body className="antialiased bg-circuit-pattern min-h-screen flex flex-col">
+        <NavBar />
+        <main className="grow">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
