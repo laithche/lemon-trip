@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from '@vercel/analytics/next';
 import { Rajdhani, Roboto } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
@@ -26,12 +27,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="it" className={`${rajdhani.variable} ${roboto.variable}`}>
       
       <body className="antialiased bg-circuit-pattern min-h-screen flex flex-col">
         <NavBar />
         <main className="grow">
+          <Analytics />
           {children}
         </main>
         <Footer />

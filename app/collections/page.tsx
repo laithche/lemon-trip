@@ -1,6 +1,6 @@
 import BentoCollection from "../components/BentoCollection";
-import Image from "next/image";
 import Link from "next/link";
+import TitleCollection from "../components/TitleCollection";
 
 export const acidCollection = [
   { id: 1, src: "/collections/acidlemonade/cyber.png", title: "Cyber" },
@@ -30,22 +30,14 @@ export default function Collections() {
 
                 <div className="flex flex-col lg:flex-row justify-center items-start gap-4 w-full px-2">
 
-                <section className="w-full lg:w-1/2 overflow-hidden">
-                    <div className="w-full flex justify-center items-center py-4">
+                <section className="w-full lg:w-1/3">
+                    <div className="w-full flex justify-center items-center px-4 py-4">
                         <Link href="/collections/acid-lemonade" className="group relative inline-block">
-                            <Image 
+                            <TitleCollection 
                                 src="/collections/acidlemonade/01acidlemonade.png"
                                 alt="scopri la collezione ACID_LEMONADE"
                                 width={350}
-                                height={200}
-                                className="
-                                    grayscale brightness-75 contrast-150
-                                    transition-all    
-                                    duration-500    
-                                    group-hover:grayscale-0
-                                    group-hover:brightness-100 
-                                    group-hover:contrast-100
-                                    group-hover:scale-105" />
+                                height={200} />
                         </Link>
                     </div>
                     <BentoCollection 
@@ -55,22 +47,14 @@ export default function Collections() {
                         />
                 </section>
 
-                <section className="w-full lg:w-1/2 overflow-hidden">
-                    <div className="w-full flex justify-center items-center py-4">
+                <section className="w-full lg:w-1/3">
+                    <div className="w-full flex justify-center items-center px-4 py-4">
                         <Link href="/collections/brain-cocktail" className="group relative inline-block">
-                            <Image 
+                            <TitleCollection 
                                 src="/collections/braincocktail/02braincocktail.png"
                                 alt="scopri la collezione BRAIN_COCKTAIL"
                                 width={350}
-                                height={200}
-                                className="
-                                    grayscale brightness-75 contrast-150 
-                                    transition-all    
-                                    duration-500    
-                                    group-hover:grayscale-0 
-                                    group-hover:brightness-100 
-                                    group-hover:contrast-100
-                                    group-hover:scale-105"/>
+                                height={200} />
                         </Link>
                     </div>
                     <BentoCollection 
@@ -80,22 +64,14 @@ export default function Collections() {
                         />
                 </section>
 
-                <section className="w-full lg:w-1/2 overflow-hidden">
-                    <div className="w-full flex justify-center items-center py-4">
+                <section className="w-full lg:w-1/3">
+                    <div className="w-full flex justify-center items-center px-4 py-4">
                         <Link href="/collections/conscious-trip" className="group relative inline-block">
-                            <Image 
+                            <TitleCollection 
                                 src="/collections/conscioustrip/03conscioustrip.png"
-                                alt="scopri la collezione CONSCIOUS_TRIP"
+                                alt="scopri la collezione ACID_LEMONADE"
                                 width={350}
-                                height={200}
-                                className="
-                                    grayscale brightness-75 constrast-150
-                                    transition-all    
-                                    duration-500
-                                    group-hover:grayscale-0
-                                    group-hover:brightness-100 
-                                    group-hover:contrast-100
-                                    group-hover:scale-105"/>
+                                height={200} />
                         </Link>
                     </div>
                     <BentoCollection 

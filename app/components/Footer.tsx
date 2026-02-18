@@ -1,22 +1,30 @@
 "use client";
 import { usePathname } from "next/navigation";
 
-export default function Footer() {
+export default function Footer({ forceShow = false}: { forceShow?: boolean }) {
     const pathname = usePathname();
-    const isLanding = pathname === "/landing"; 
+    const isHome = pathname === "/";
+    
+    if (isHome && !forceShow) {
+        return null;
+    }
 
     return (
-        <footer className={`
-            w-full py-6 text-center transition-all duration-500
-            ${isLanding 
-                ? "absolute bottom-0 z-30 bg-transparent text-white" 
-                : "relative bg-transparent text-black"}
+        <footer className={`w-full py-8 text-center transition-colors duration-300
+            ${forceShow 
+                ? "bg-transparent text-white"
+                : "bg-transparent text-zinc-900 border-t border-zinc-100"
+            }
         `}>
             <div className="container mx-auto px-4">
-                <p className="text-sm mt-1 opacity-70 font-roboto">
-                    <b className="tracking-widest font-rajdhani">
+                <p className="text-[10px] md:text-sm opacity-80 font-roboto tracking-wide">
+                    <b className="tracking-widest font-rajdhani uppercase mr-2">
                         © 2026 LEMON TRIP
-                    </b> - lemontripstyle@gmail.com
+                    </b> 
+                    <span className="hidden sm:inline opacity-40">|</span> 
+                    <span className="block sm:inline sm:ml-2 mt-1 sm:mt-0">
+                        lemontripstyle@gmail.com
+                    </span>
                 </p>
             </div>
         </footer>

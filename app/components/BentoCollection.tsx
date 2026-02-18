@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
+import BentoSmartImage from "./BentoSmartImage";
 
 interface BentoItem {
   id: number;
@@ -42,11 +42,9 @@ export default function BentoCollection({ items, collectionTitle, totalItems = 0
                 ${size === "wide" ? "col-span-2 h-[171px] md:h-[294px]" : ""}
               `}
             >
-              <Image
+              <BentoSmartImage
                 src={item.src}
                 alt={item.title}
-                fill
-                className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
               />
 
               {/* counter nell'ultima card */}

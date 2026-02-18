@@ -1,5 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
+import TitleCollection from "@/app/components/TitleCollection";
 import { PhotoCard } from "@/app/components/PhotoCard";
 import BrainGallery from "@/app/components/BrainGallery";
 
@@ -9,22 +8,14 @@ export default function BrainCocktail() {
         
         <div className="w-full flex flex-col items-center">
 
-            <div className="relative z-10 py-10 px-10"></div>
+            <div className="relative z-10 py-6 md:py-10 px-10"></div>
             
-            <div className="group relative z-20 inline-block -mb-15 md:-mb-19">
-                <Image 
+            <div className="group relative z-20 inline-block p-2 -mb-22 md:-mb-26">
+                <TitleCollection 
                     src="/collections/braincocktail/02braincocktail.png"
-                    alt="etichetta BRAIN_COCKTAIL"
+                    alt="BRAIN_COCKTAIL"
                     width={400}
-                    height={250}
-                    className="
-                            grayscale brightness-75 constrast-150
-                            transition-all    
-                            duration-500
-                            group-hover:grayscale-0
-                            group-hover:brightness-100 
-                            group-hover:contrast-100
-                            group-hover:scale-105"/>
+                    height={250} />
             </div>
         </div>
 

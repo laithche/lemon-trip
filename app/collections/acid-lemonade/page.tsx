@@ -1,4 +1,4 @@
-import Image from "next/image";
+import TitleCollection from "@/app/components/TitleCollection";
 import { PhotoCard } from "@/app/components/PhotoCard";
 import AcidGallery from "@/app/components/AcidGallery";
 
@@ -10,20 +10,12 @@ export default function AcidLemonade() {
 
             <div className="relative z-10 py-10 px-10"></div>
             
-            <div className="group relative z-20 inline-block p-4 -mb-22 md:-mb-26">
-                <Image 
+            <div className="group relative z-20 inline-block p-2 -mb-22 md:-mb-26">
+                <TitleCollection 
                     src="/collections/acidlemonade/01acidlemonade.png"
-                    alt="etichetta ACID_LEMONADE"
+                    alt="ACID_LEMONADE"
                     width={400}
-                    height={250}
-                    className="
-                            grayscale brightness-75 constrast-150
-                            transition-all    
-                            duration-500
-                            group-hover:grayscale-0
-                            group-hover:brightness-100 
-                            group-hover:contrast-100
-                            group-hover:scale-105"/>
+                    height={250} />
             </div>
         </div>
 
