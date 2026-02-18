@@ -3,37 +3,27 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const acidCollection = [
-  { id: 1, src: "/collections/acidlemonade/scolopendra.png", title: "Scolopendra" },
-  { id: 2, src: "/collections/acidlemonade/bones.png", title: "Bones" },
-  { id: 3, src: "/collections/acidlemonade/piercing.png", title: "Piercing" },
-  { id: 4, src: "/collections/acidlemonade/cyber.png", title: "Cyber" },
+  { id: 1, src: "/collections/acidlemonade/cyber.png", title: "Cyber" },
+  { id: 2, src: "/collections/acidlemonade/zombie.png", title: "Zombie" },
+  { id: 3, src: "/collections/acidlemonade/moon.png", title: "Moon" },
 ];
 
 export const brainCollection = [
-  { id: 1, src: "/collections/acidlemonade/logo.png", title: "Logo" },
-  { id: 2, src: "/collections/acidlemonade/bones.png", title: "Bones" },
-  { id: 3, src: "/collections/acidlemonade/piercing.png", title: "Piercing" },
-  { id: 4, src: "/collections/acidlemonade/cyber.png", title: "Cyber" },
+  { id: 1, src: "/collections/braincocktail/tshirt_front.png", title: "Logo" },
+  { id: 2, src: "/collections/braincocktail/wildsoul_hoodie_back.png", title: "Wild Soul" },
+  { id: 3, src: "/collections/braincocktail/tribal_tshirt_back.png", title: "Tribal" },
 ];
 
 export const tripCollection = [
-  { id: 1, src: "/collections/acidlemonade/scolopendra.png", title: "Scolopendra" },
-  { id: 2, src: "/collections/acidlemonade/bones.png", title: "Bones" },
-  { id: 3, src: "/collections/acidlemonade/piercing.png", title: "Piercing" },
-  { id: 4, src: "/collections/acidlemonade/cyber.png", title: "Cyber" },
+  { id: 1, src: "/collections/conscioustrip/eyes_hoodie_back.jpg", title: "Eyes" },
+  { id: 2, src: "/collections/conscioustrip/rat_tshirt_front.jpg", title: "Rat Brain" },
+  { id: 3, src: "/collections/conscioustrip/eyes_tshirt_front.jpg", title: "Eyes Logo" },
 ];
 
 export default function Collections() {
     return (
         <>
-        
-        <div className="w-full flex justify-start px-4 mt-2">
-        <Link href="/landing" className="bg-zinc-50 group flex items-center gap-2 font-mono text-xs text-zinc-900 hover:text-yellow-500 transition-colors">
-            <span className="text-lg group-hover:translate-x-1 transition-transform"> ← </span>
-            <span>[ TORNA_ALLA_HOME ]</span>
-        </Link>
-        </div>
-
+   
         <div className="min-h-screen hero-pattern">
             
             <div className="relative z-10 py-10 px-10">
@@ -42,7 +32,7 @@ export default function Collections() {
 
                 <section className="w-full lg:w-1/2 overflow-hidden">
                     <div className="w-full flex justify-center items-center py-4">
-                        <Link href="/collections/acid-lemonade" className="group relative overflow-hidden inline-block">
+                        <Link href="/collections/acid-lemonade" className="group relative inline-block">
                             <Image 
                                 src="/collections/acidlemonade/01acidlemonade.png"
                                 alt="scopri la collezione ACID_LEMONADE"
@@ -67,7 +57,7 @@ export default function Collections() {
 
                 <section className="w-full lg:w-1/2 overflow-hidden">
                     <div className="w-full flex justify-center items-center py-4">
-                        <Link href="/collections/brain-cocktail" className="group relative overflow-hidden inline-block">
+                        <Link href="/collections/brain-cocktail" className="group relative inline-block">
                             <Image 
                                 src="/collections/braincocktail/02braincocktail.png"
                                 alt="scopri la collezione BRAIN_COCKTAIL"
@@ -92,7 +82,7 @@ export default function Collections() {
 
                 <section className="w-full lg:w-1/2 overflow-hidden">
                     <div className="w-full flex justify-center items-center py-4">
-                        <Link href="/collections/conscious-trip" className="group relative overflow-hidden inline-block">
+                        <Link href="/collections/conscious-trip" className="group relative inline-block">
                             <Image 
                                 src="/collections/conscioustrip/03conscioustrip.png"
                                 alt="scopri la collezione CONSCIOUS_TRIP"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Rajdhani, Roboto } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="it" className={`${rajdhani.variable} ${roboto.variable}`}>
       
       <body className="antialiased bg-circuit-pattern min-h-screen flex flex-col">
+        <NavBar />
         <main className="grow">
           {children}
         </main>

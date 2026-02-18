@@ -12,14 +12,14 @@ interface BentoItem {
 interface BentoProps {
   items: BentoItem[];
   collectionTitle: string;
-  totalItems?: number; // quanti capi ci sono in totale
+  totalItems?: number; //quante immagini ci sono in totale
 }
 
 export default function BentoCollection({ items, collectionTitle, totalItems = 0 }: BentoProps) {
-  // solo i primi 4 per la bento preview
+  //solo i primi 3 per la bento preview
   const previewItems = items.slice(0, 3);
   const remainingCount = totalItems > 3 ? totalItems - 3 : 0;
-  // collezione specifica
+  //collezione specifica
   const collectionSlug = collectionTitle.toLowerCase().replace(/\s+/g, '-');
 
   return (
@@ -46,16 +46,16 @@ export default function BentoCollection({ items, collectionTitle, totalItems = 0
                 src={item.src}
                 alt={item.title}
                 fill
-                className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:invert group-hover:scale-105"
+                className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105"
               />
 
               {/* counter nell'ultima card */}
               {isLast && (
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-40 flex flex-col items-center justify-center border-2 border-dashed border-white/20 group-hover:bg-transparent transition-all duration-500">
-                    <span className="font-mono text-4xl text-white font-black group-hover:text-black transition-colors duration-500">
+                    <span className="font-mono text-4xl text-white font-black transition-colors duration-500">
                     +{remainingCount}
                     </span>
-                    <span className="font-mono text-[10px] text-zinc-400 mt-2 group-hover:text-black font-bold transition-colors duration-500">
+                    <span className="font-mono text-[10px] text-zinc-300 mt-2 font-bold transition-colors duration-500">
                     [ SCOPRI ]
                     </span>
                 </div>
