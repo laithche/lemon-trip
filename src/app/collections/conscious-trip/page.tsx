@@ -1,8 +1,18 @@
-import TitleCollection from "@/app/components/TitleCollection";
-import { PhotoCard } from "@/app/components/PhotoCard";
-import TripGallery from "@/app/components/TripGallery";
+"use client"
+import TitleCollection from "../../components/TitleCollection";
+import { PhotoCard } from "../../components/PhotoCard";
+import TripGallery from "../../components/TripGallery";
+import { useLanguage } from "@/src/context/LanguageContext"
+
+const TripU = ({ children }: { children: React.ReactNode }) => (
+    <u className="decoration-[#C2F148] underline underline-offset-4 decoration-2 italic px-1">
+        {children}
+    </u>
+);
 
 export default function ConsciousTrip() {
+    const { t } = useLanguage(); 
+
     return (
         <>
 
@@ -29,21 +39,23 @@ export default function ConsciousTrip() {
                 </div>
                 
                 <p className="relative z-10 font-roboto text-base md:text-lg tracking-tight text-zinc-900 leading-relaxed max-w-5xl mx-auto text-center">
-                    <b><u className="decoration-[#C2F148] underline underline-offset-4 decoration-2">Conscious Trip</u></b> è la 
-                    terza tappa del viaggio Lemon Trip: dopo l’acidità istintiva della prima fase (“Acid Lemonade”) 
-                    e la miscela mentale della seconda (“Brain Cocktail”), nasce una consapevolezza più profonda. Parla del momento 
-                    in cui il viaggio cambia tono e diventa introspezione — un&apos;estetica che porta in superficie ciò che stava sotto 
-                    tutto il tempo. Le grafiche <i><u className="decoration-[#C2F148] underline underline-offset-4 decoration-2">Rat Brain</u> ed <u className="decoration-[#C2F148] underline underline-offset-4 decoration-2">Eyes</u></i> (insieme 
-                    alle loro versioni rivisitate del logo) rappresentano due modi diversi di attraversare questa presa di coscienza. 
+                    <b><u className="decoration-[#C2F148] ...">{t.collections.conscious.title}</u></b>
+                    {" "}
+                    {t.collections.conscious.desc.split(/(Rat Brain|Eyes)/g).map((part, i) => (
+                        ["Rat Brain", "Eyes"].includes(part) ? (
+                            <TripU key={i}>{part}</TripU>
+                        ) : (
+                            part
+                        )
+                    ))}
+                    <br /><br />
+                    {t.collections.conscious.specs}
                     <br />
-                    Entrambe le grafiche con i relativi loghi sono state stampate su:
+                    {t.collections.conscious.mat1}
                     <br />
-                    · <b>Felpa con/senza zip</b> - materiali: 80% cotone 20% poliestere riciclato.
+                    {t.collections.conscious.mat2}
                     <br />
-                    · <b>T-Shirt</b> - materiali: 100% cotone (50% cotone riciclato - 50% cotone).
-                    <br />
-                    Stampa grande sulla schiena e logo classico sul petto (lato sinistro).
-
+                    {t.collections.conscious.mat3}
                 </p>
             </div>
         </div>

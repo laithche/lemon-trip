@@ -4,6 +4,7 @@ import { Rajdhani, Roboto } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import { LanguageProvider } from "@/src/context/LanguageContext";
 
 const rajdhani = Rajdhani({
   subsets: ["latin"],
@@ -18,25 +19,26 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Lemon Trip | Underground Handicraft",
-  description: "Serigrafia artigianale in Sardegna",
+  title: "Lemon Trip | Underground Wear",
+  description: "Handmade Streetwear",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-
   return (
-    <html lang="it" className={`${rajdhani.variable} ${roboto.variable}`}>
+    <html lang="en" className={`${rajdhani.variable} ${roboto.variable}`}>
       
       <body className="antialiased bg-circuit-pattern min-h-screen flex flex-col">
-        <NavBar />
-        <main className="grow">
-          <Analytics />
-          {children}
-        </main>
+          <LanguageProvider>
+            <NavBar />
+            <main className="grow">
+              <Analytics />
+              {children}
+            </main>
+          </LanguageProvider>
         <Footer />
       </body>
     </html>

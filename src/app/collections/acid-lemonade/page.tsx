@@ -1,8 +1,18 @@
-import TitleCollection from "@/app/components/TitleCollection";
-import { PhotoCard } from "@/app/components/PhotoCard";
-import AcidGallery from "@/app/components/AcidGallery";
+"use client"
+import TitleCollection from "../../components/TitleCollection";
+import { PhotoCard } from "../../components/PhotoCard";
+import AcidGallery from "../../components/AcidGallery";
+import { useLanguage } from "@/src/context/LanguageContext"
+
+const AcidU = ({ children }: { children: React.ReactNode }) => (
+    <u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2 italic px-1">
+        {children}
+    </u>
+);
 
 export default function AcidLemonade() {
+    const { t } = useLanguage();
+
     return (
         <>
 
@@ -29,19 +39,17 @@ export default function AcidLemonade() {
                 </div>
                 
                 <p className="relative z-10 font-roboto text-base md:text-lg tracking-tight text-zinc-900 leading-relaxed max-w-5xl mx-auto text-center">
-                    <b><u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">Acid Lemonade</u></b> è 
-                    l’impatto iniziale del viaggio Lemon Trip: una scossa fisica, sporca e primitiva 
-                    dove l’estetica non cerca equilibrio ma intensità. Nasce da un’epoca spezzata, è una goccia di limone su 
-                    una ferita aperta che non si chiude ma brucia abbastanza da costringerti a muoverti. Le sei grafiche di 
-                    questa fase (<i><u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">Cyber</u>, <u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">
-                    Piercing</u>, <u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">Zombie</u>, <u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">
-                    Moon</u>, <u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">Bones</u></i> e <u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">
-                    <i>Nun</i></u>) condensano quell’impatto: volti inquieti, corpi modificati, simboli velenosi e figure sacre deformate. Un immaginario fatto di 
-                    maschere, insetti, ossa e carne che si scioglie — un linguaggio visivo ruvido, nato per dare forma al caos 
-                    da cui parte.
-                    <br />
-                    Tutte e sei le grafiche di questa collezione sono state stampate solo su <b>T-Shirt</b> - materiali: 
-                    100% cotone (50% cotone riciclato - 50% cotone) - con stampa davanti e logo classico dietro.
+                    <b><u className="decoration-[#F3CB5D] underline underline-offset-4 decoration-2">{t.collections.acid.title}</u></b>
+                    {" "}
+                    {t.collections.acid.desc.split(/(Cyber|Piercing|Zombie|Moon|Bones|Nun)/g).map((part, i) => (
+                        ["Cyber", "Piercing", "Zombie", "Moon", "Bones", "Nun"].includes(part) ? (
+                        <AcidU key={i}>{part}</AcidU>
+                        ) : (
+                        part
+                        )
+                    ))}
+                    <br /><br />
+                    {t.collections.acid.specs}
                 </p>
             </div>
         </div>

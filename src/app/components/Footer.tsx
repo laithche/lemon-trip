@@ -13,7 +13,7 @@ export default function Footer({ forceShow = false}: { forceShow?: boolean }) {
         <footer className={`w-full py-8 text-center transition-colors duration-300
             ${forceShow 
                 ? "bg-transparent text-white"
-                : "bg-transparent text-zinc-900 border-t border-zinc-100"
+                : "bg-transparent text-zinc-900"
             }
         `}>
             <div className="container mx-auto px-4">

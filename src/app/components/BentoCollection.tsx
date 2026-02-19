@@ -1,6 +1,10 @@
+// ANTEPRIMA COLLEZIONI
+
 "use client";
 import Link from "next/link";
 import BentoSmartImage from "./BentoSmartImage";
+import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/src/context/LanguageContext";
 
 interface BentoItem {
   id: number;
@@ -12,10 +16,31 @@ interface BentoItem {
 interface BentoProps {
   items: BentoItem[];
   collectionTitle: string;
-  totalItems?: number; //quante immagini ci sono in totale
+  totalItems?: number;
 }
 
 export default function BentoCollection({ items, collectionTitle, totalItems = 0 }: BentoProps) {
+  const { t } = useLanguage();
+  const [isFocused, setIsFocused] = useState(false);
+  const marqueeRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFocused(entry.isIntersecting);
+      },
+      { 
+        threshold: 1.0, //si attiva quando tutto il marquee è visibile
+        rootMargin: "-10% 0px -10% 0px" 
+      }
+    );
+
+    if (marqueeRef.current) observer.observe(marqueeRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   //solo i primi 3 per la bento preview
   const previewItems = items.slice(0, 3);
   const remainingCount = totalItems > 3 ? totalItems - 3 : 0;
@@ -54,7 +79,7 @@ export default function BentoCollection({ items, collectionTitle, totalItems = 0
                     +{remainingCount}
                     </span>
                     <span className="font-mono text-[10px] text-zinc-300 mt-2 font-bold transition-colors duration-500">
-                    [ SCOPRI ]
+                    [ {t.bento.discover} ]
                     </span>
                 </div>
             )}
@@ -73,23 +98,52 @@ export default function BentoCollection({ items, collectionTitle, totalItems = 0
       </div>
 
       <Link 
-            href={`/collections/${collectionSlug}`}
-            className="mx-auto block w-[93%] max-w-5xl overflow-hidden whitespace-nowrap border-y border-white/5 py-3 mb-6 group bg-black/30 hover:bg-yellow-400/50 transition-colors duration-300">
-            <div className="animate-marquee-custom">
-                {[...Array(15)].map((_, i) => (
-                <span key={i} className="font-mono text-[12px] text-black mx-2 uppercase font-bold group-hover:text-black">
-                    EXPLORE_{collectionTitle.replace(/\s+/g, '_')}_ARCHIVE // CLICK_TO_ENTER // 
-                </span>
-                ))}
-            </div>
-            {/* blocco duplicato per loop */}
-            <div className="animate-marquee-custom">
-                {[...Array(15)].map((_, i) => (
-                <span key={i} className="font-mono text-[12px] text-black mx-2 uppercase font-bold group-hover:text-black">
-                    EXPLORE_{collectionTitle.replace(/\s+/g, '_')}_ARCHIVE // CLICK_TO_ENTER // 
-                </span>
-                ))}
-            </div>
+        ref={marqueeRef}
+        href={`/collections/${collectionSlug}`}
+        className={`
+          mx-auto block w-[93%] max-w-5xl overflow-hidden whitespace-nowrap border-y border-white/5 py-3 mb-6 group transition-all duration-700
+          
+          /* DESKTOP HOVER */
+          md:bg-black/30 md:hover:bg-[#FCFC03]/50 
+          
+          /* MOBILE REVEAL: gestito da JS */
+          ${isFocused 
+            ? "bg-[#FCFC03]/50 scale-[1.02] border-white/20" 
+            : "bg-black/10 scale-100 border-white/5"}
+        `}>
+          <div className="animate-marquee-custom">
+            {[...Array(15)].map((_, i) => (
+              <span 
+                key={i} 
+                className={`font-mono text-[12px] mx-2 uppercase font-bold transition-colors duration-700
+                  /* DESKTOP HOVER */
+                  md:text-white md:group-hover:text-black
+                  
+                  /* MOBILE REVEAL */
+                  ${isFocused ? "text-black" : "text-zinc-600"}
+                `}
+              >
+                {t.bento.explore}_{collectionTitle.replace(/\s+/g, '_')} {'//'} {t.bento.enter} {'//'}
+              </span>
+            ))}
+          </div>
+          {/* blocco duplicato per loop */}
+          <div className="animate-marquee-custom">
+            {[...Array(15)].map((_, i) => (
+              <span 
+                key={i} 
+                className={`font-mono text-[12px] mx-2 uppercase font-bold transition-colors duration-700
+                  /* DESKTOP HOVER */
+                  md:text-white md:group-hover:text-black
+                  
+                  /* MOBILE REVEAL */
+                  ${isFocused ? "text-black" : "text-zinc-600"}
+                `}
+              >
+                {t.bento.explore}_{collectionTitle.replace(/\s+/g, '_')} {'//'} {t.bento.enter} {'//'}
+              </span>
+            ))}
+          </div>
         </Link>
 
     </div>

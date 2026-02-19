@@ -1,28 +1,32 @@
+// GALLERY DISEGNI IN FONDO ALLA PAGINA
+
 "use client"
 import { useState } from "react";
 import Image from "next/image";
 
-export default function BrainGallery() {
+export default function AcidGallery() {
 
     const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
     const disegni = [
-        { id: "01", name: "CARAVAN_LIFE", src: "/collections/braincocktail/img/caravanlife.jpg" },
-        { id: "02", name: "WILD_SOUL", src: "/collections/braincocktail/img/wildsoul.jpg" },
-        { id: "03", name: "TRIBAL", src: "/collections/braincocktail/img/tribal.jpg" },
-        { id: "04", name: "ACID", src: "/collections/braincocktail/img/acid.jpg" },
+        { id: "01", name: "CYBER", src: "/collections/acidlemonade/img/cyber.jpg" },
+        { id: "02", name: "PIERCING", src: "/collections/acidlemonade/img/piercing.jpg" },
+        { id: "03", name: "ZOMBIE", src: "/collections/acidlemonade/img/zombie.jpg" },
+        { id: "04", name: "MOON", src: "/collections/acidlemonade/img/moon.jpg" },
+        { id: "05", name: "BONES", src: "/collections/acidlemonade/img/bones.jpg" },
+        { id: "06", name: "NUN", src: "/collections/acidlemonade/img/nun.jpg" }
     ];
 
     return (
         <>
         
         <div className="w-full max-w-7xl mx-auto px-4 py-16">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {disegni.map((item) => (
                         <div key={item.id} className="group flex flex-col">
                             <div 
                                 className="relative aspect-4/5 overflow-hidden border border-white/10 bg-zinc-900 shadow-lg cursor-zoom-in"
-                                onClick={() => setSelectedImg(item.src)} //clicca per aprire
+                                onClick={() => setSelectedImg(item.src)}
                             >
                                 <Image 
                                     src={item.src} 
@@ -47,7 +51,7 @@ export default function BrainGallery() {
         {selectedImg && (
             <div 
                 className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out p-4 md:p-10"
-                onClick={() => setSelectedImg(null)} //clicca ovunque per chiudere
+                onClick={() => setSelectedImg(null)}
                 >
                 <div className="relative w-full h-full max-w-5xl max-vh-90">
                     <Image 

@@ -1,8 +1,18 @@
-import TitleCollection from "@/app/components/TitleCollection";
-import { PhotoCard } from "@/app/components/PhotoCard";
-import BrainGallery from "@/app/components/BrainGallery";
+"use client"
+import TitleCollection from "../../components/TitleCollection";
+import { PhotoCard } from "../../components/PhotoCard";
+import BrainGallery from "../../components/BrainGallery";
+import { useLanguage } from "@/src/context/LanguageContext"
+
+const BrainU = ({ children }: { children: React.ReactNode }) => (
+    <u className="decoration-[#FEBADC] underline underline-offset-4 decoration-2 italic px-1">
+        {children}
+    </u>
+);
 
 export default function BrainCocktail() {
+    const { t } = useLanguage();
+
     return (
         <>
         
@@ -29,22 +39,23 @@ export default function BrainCocktail() {
                 </div>
                 
                 <p className="relative z-10 font-roboto text-base md:text-lg tracking-tight text-zinc-900 leading-relaxed max-w-5xl mx-auto text-center">
-                    <b><u className="decoration-[#FEBADC] underline underline-offset-4 decoration-2">Brain Cocktail</u></b> è 
-                    un caos creativo che non cerca ordine ma libertà. E’ la seconda tappa del viaggio Lemon Trip: 
-                    il momento in cui l’istinto grezzo della prima fase (“Acid Lemonade”) si mescola con immagini, pensieri e 
-                    simboli che iniziano a prendere forma. Questa fase del viaggio parla di spirito nomade, una vita selvaggia 
-                    scandita da ritmi tribali e visioni distorte, e lo fa con quattro grafiche inedite: <i><u className="decoration-[#FEBADC] underline underline-offset-4 decoration-2">
-                    Caravan Life</u>, <u className="decoration-[#FEBADC] underline underline-offset-4 decoration-2">Wild Soul</u>, <u className="decoration-[#FEBADC] underline underline-offset-4 decoration-2">
-                    Tribal</u></i> e <i><u className="decoration-[#FEBADC] underline underline-offset-4 decoration-2">Acid</u></i>. 
+                    <b><u className="decoration-[#FEBADC] ...">{t.collections.brain.title}</u></b>
+                    {" "}
+                    {t.collections.brain.desc.split(/(Caravan Life|Wild Soul|Tribal|Acid)/g).map((part, i) => (
+                        ["Caravan Life", "Wild Soul", "Tribal", "Acid"].includes(part) ? (
+                            <BrainU key={i}>{part}</BrainU>
+                        ) : (
+                            part
+                        )
+                    ))}
+                    <br /><br />
+                    {t.collections.brain.specs}
                     <br />
-                    Tutte e quattro le grafiche sono state stampate su:
+                    {t.collections.brain.mat1}
                     <br />
-                    · <b>Felpa con/senza zip</b> - materiali: 80% cotone 20% poliestere riciclato.
+                    {t.collections.brain.mat2}
                     <br />
-                    · <b>T-Shirt</b> - materiali: 100% cotone (50% cotone riciclato - 50% cotone).
-                    <br />
-                    Stampa grande sulla schiena e logo classico sul petto (lato sinistro).
-
+                    {t.collections.brain.mat3}
                 </p>
             </div>
         </div>

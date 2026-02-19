@@ -1,3 +1,5 @@
+// GALLERY DISEGNI IN FONDO ALLA PAGINA
+
 "use client"
 import { useState } from "react";
 import Image from "next/image";

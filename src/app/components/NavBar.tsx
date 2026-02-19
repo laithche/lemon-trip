@@ -4,28 +4,38 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/src/context/LanguageContext"
+import { Language } from "../translations";
 
 const NoiseOverlay = () => (
   <div 
     className="absolute inset-0 z-50 opacity-[0.25] pointer-events-none mix-blend-overlay"
     style={{ 
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-      backgroundSize: '200px 200px' // Forza la ripetizione corretta
+      backgroundSize: '200px 200px'
     }}
   />
 );
 
 export default function NavBar() {
+  const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [showCollections, setShowCollections] = useState(false);
 
+  const languagesList = [
+    { code: "it" as Language, label: "IT" },
+    { code: "en" as Language, label: "EN" },
+    { code: "es" as Language, label: "ES" },
+    { code: "fr" as Language, label: "FR" }
+  ];
+
   const collections = [
-  { name: "ACID LEMONADE", slug: "/collections/acid-lemonade" },
-  { name: "BRAIN COCKTAIL", slug: "/collections/brain-cocktail" },
-  { name: "CONSCIOUS TRIP", slug: "/collections/conscious-trip" },
-];
-  
+    { name: "ACID LEMONADE", slug: "/collections/acid-lemonade" },
+    { name: "BRAIN COCKTAIL", slug: "/collections/brain-cocktail" },
+    { name: "CONSCIOUS TRIP", slug: "/collections/conscious-trip" },
+  ];
+
   if (pathname === "/") return null;
 
   return (
@@ -58,8 +68,24 @@ export default function NavBar() {
             href="/collections" 
             className="text-zinc-100 hover:text-[#C2F148] transition-colors shrink-0" >
             <span className="text-[#C2F148]">{"//"}</span>
-            COLLEZIONI
+            {t.nav.collections}
           </Link>
+
+          {/* selettore lingua desktop */}
+          <div className="hidden md:flex absolute right-10 items-center gap-3 font-mono text-[9px] tracking-tighter">
+            {languagesList.map((l, index) => (
+              <div key={l.code} className="flex items-center gap-3">
+                <button 
+                  onClick={() => setLanguage(l.code)}
+                  className={`transition-all hover:text-[#C2F148] ${language === l.code ? "text-[#C2F148] font-bold" : "text-zinc-500"}`}
+                >
+                  {l.label}
+                </button>
+                {index < languagesList.length - 1 && <span className="text-zinc-800">/</span>}
+              </div>
+            ))}
+          </div>
+
         </div>
 
         {/* layout mobile */}
@@ -102,7 +128,7 @@ export default function NavBar() {
               <button 
                 onClick={() => setShowCollections(!showCollections)}
                 className={`text-2xl flex items-center gap-2 ${pathname.includes("/collections") ? "text-zinc-100" : "text-zinc-500"}`}>
-                COLLEZIONI 
+                {t.nav.collections}
                 <span className={`text-xs transition-transform duration-300 ${showCollections ? "rotate-180" : ""}`}>
                   ▼
                 </span>
@@ -115,7 +141,7 @@ export default function NavBar() {
                   href="/collections"
                   onClick={() => setIsOpen(false)}
                   className={`text-[13px] tracking-[0.3em] ${pathname === "/collections" ? "text-[#C2F148] pointer-events-none" : "text-zinc-400"}`}>
-                  [ VEDI TUTTE ]
+                  [ {t.nav.viewAll} ]
                 </Link>
 
                 {/* mappa delle collezioni */}
@@ -140,7 +166,23 @@ export default function NavBar() {
                 })}
               </div>
             </div>
-            
+
+            <div className="flex flex-wrap justify-center gap-6 mb-8 font-mono text-xs px-10">
+              {languagesList.map((l, index) => (
+                <div key={l.code} className="flex items-center gap-3">
+                  <button 
+                    onClick={() => {
+                      setLanguage(l.code);
+                    }}
+                    className={`transition-all hover:text-[#C2F148] ${language === l.code ? "text-[#C2F148] font-bold" : "text-zinc-500"}`}
+                  >
+                    {l.label}
+                  </button>
+                  {index < languagesList.length - 1 && <span className="text-zinc-800">/</span>}
+                </div>
+              ))}
+            </div>
+                        
             <div className="absolute bottom-10 text-[10px] text-zinc-700 tracking-[0.5em] uppercase">
               Lemon Trip // 2026
             </div>

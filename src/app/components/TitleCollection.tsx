@@ -20,7 +20,7 @@ export default function TitleCollection({ src, alt, width, height }: Props) {
       ([entry]) => {
         setIsFocused(entry.isIntersecting);
       },
-      { threshold: 0.7 } // Si attiva quando l'immagine è quasi tutta visibile
+      { threshold: 0.7 }
     );
 
     if (elementRef.current) observer.observe(elementRef.current);

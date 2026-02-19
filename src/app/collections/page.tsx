@@ -1,6 +1,8 @@
-import BentoCollection from "../components/BentoCollection";
+"use client"
+import BentoCollection from "./../components/BentoCollection";
 import Link from "next/link";
-import TitleCollection from "../components/TitleCollection";
+import TitleCollection from "./../components/TitleCollection";
+import { useLanguage } from "@/src/context/LanguageContext";
 
 export const acidCollection = [
   { id: 1, src: "/collections/acidlemonade/cyber.png", title: "Cyber" },
@@ -21,6 +23,8 @@ export const tripCollection = [
 ];
 
 export default function Collections() {
+    const { t } = useLanguage();
+
     return (
         <>
    
@@ -35,7 +39,7 @@ export default function Collections() {
                         <Link href="/collections/acid-lemonade" className="group relative inline-block">
                             <TitleCollection 
                                 src="/collections/acidlemonade/01acidlemonade.png"
-                                alt="scopri la collezione ACID_LEMONADE"
+                                alt={`${t.collections.discover} ACID_LEMONADE`}
                                 width={350}
                                 height={200} />
                         </Link>
@@ -52,7 +56,7 @@ export default function Collections() {
                         <Link href="/collections/brain-cocktail" className="group relative inline-block">
                             <TitleCollection 
                                 src="/collections/braincocktail/02braincocktail.png"
-                                alt="scopri la collezione BRAIN_COCKTAIL"
+                                alt={`${t.collections.discover} BRAIN_COCKTAIL`}
                                 width={350}
                                 height={200} />
                         </Link>
@@ -60,7 +64,7 @@ export default function Collections() {
                     <BentoCollection 
                         items={brainCollection} 
                         collectionTitle="Brain Cocktail" 
-                        totalItems={12} 
+                        totalItems={15} 
                         />
                 </section>
 
@@ -69,7 +73,7 @@ export default function Collections() {
                         <Link href="/collections/conscious-trip" className="group relative inline-block">
                             <TitleCollection 
                                 src="/collections/conscioustrip/03conscioustrip.png"
-                                alt="scopri la collezione ACID_LEMONADE"
+                                alt={`${t.collections.discover} CONSCIOUS_TRIP`}
                                 width={350}
                                 height={200} />
                         </Link>
@@ -77,7 +81,7 @@ export default function Collections() {
                     <BentoCollection 
                         items={tripCollection} 
                         collectionTitle="Conscious Trip" 
-                        totalItems={12} 
+                        totalItems={15} 
                         />
                 </section>
                 </div>

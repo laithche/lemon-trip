@@ -1,3 +1,5 @@
+// CARD PER LE FOTO DELLE COLLEZIONI
+
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -14,7 +16,7 @@ export function PhotoCard({ src, alt, width, height }: AcidCardProps) {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    //solo su mobile (sotto i 768px) attiviamo lo scroll reveal
+    //solo su mobile (sotto i 768px) si attiva lo scroll reveal
     if (window.innerWidth >= 768) return;
 
     const observer = new IntersectionObserver(
