@@ -22,24 +22,31 @@ interface BentoProps {
 export default function BentoCollection({ items, collectionTitle, totalItems = 0 }: BentoProps) {
   const { t } = useLanguage();
   const [isFocused, setIsFocused] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !window.matchMedia("(hover: hover)").matches;
+    }
+    return false;
+  });
   const marqueeRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    if (window.innerWidth >= 768) return;
+    //se è un pc con mouse usa hover css
+    if (!isTouchDevice) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsFocused(entry.isIntersecting);
       },
       { 
-        threshold: 1.0, //si attiva quando tutto il marquee è visibile
-        rootMargin: "-10% 0px -10% 0px" 
+        threshold: 0.8, 
+        rootMargin: "-5% 0px -5% 0px" 
       }
     );
 
     if (marqueeRef.current) observer.observe(marqueeRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [isTouchDevice]);
 
   //solo i primi 3 per la bento preview
   const previewItems = items.slice(0, 3);
@@ -102,25 +109,25 @@ export default function BentoCollection({ items, collectionTitle, totalItems = 0
         href={`/collections/${collectionSlug}`}
         className={`
           mx-auto block w-[93%] max-w-5xl overflow-hidden whitespace-nowrap border-y border-white/5 py-3 mb-6 group transition-all duration-700
-          
-          /* DESKTOP HOVER */
-          md:bg-black/30 md:hover:bg-[#FCFC03]/50 
-          
-          /* MOBILE REVEAL: gestito da JS */
-          ${isFocused 
+          /* logica desktop con mouse */
+          ${!isTouchDevice ? "bg-black/30 hover:bg-[#FCFC03]/50 scale-100" : ""}
+          /* logica touch */
+          ${isTouchDevice && isFocused 
             ? "bg-[#FCFC03]/50 scale-[1.02] border-white/20" 
-            : "bg-black/10 scale-100 border-white/5"}
+            : ""}
+          ${isTouchDevice && !isFocused 
+            ? "bg-black/10 scale-100 border-white/5" 
+            : ""}
         `}>
           <div className="animate-marquee-custom">
             {[...Array(15)].map((_, i) => (
               <span 
                 key={i} 
                 className={`font-mono text-[12px] mx-2 uppercase font-bold transition-colors duration-700
-                  /* DESKTOP HOVER */
-                  md:text-white md:group-hover:text-black
-                  
-                  /* MOBILE REVEAL */
-                  ${isFocused ? "text-black" : "text-zinc-600"}
+                  /* desktop: testo cambia colore su hover */
+                  ${!isTouchDevice ? "text-white group-hover:text-black" : ""}
+                  /* touch: cambia colore basandosi sullo scroll */
+                  ${isTouchDevice && isFocused ? "text-black" : "text-zinc-600"}
                 `}
               >
                 {t.bento.explore}_{collectionTitle.replace(/\s+/g, '_')} {'//'} {t.bento.enter} {'//'}
@@ -133,11 +140,10 @@ export default function BentoCollection({ items, collectionTitle, totalItems = 0
               <span 
                 key={i} 
                 className={`font-mono text-[12px] mx-2 uppercase font-bold transition-colors duration-700
-                  /* DESKTOP HOVER */
-                  md:text-white md:group-hover:text-black
-                  
-                  /* MOBILE REVEAL */
-                  ${isFocused ? "text-black" : "text-zinc-600"}
+                  /* desktop: testo cambia colore su hover */
+                  ${!isTouchDevice ? "text-white group-hover:text-black" : ""}
+                  /* touch: cambia colore basandosi sullo scroll */
+                  ${isTouchDevice && isFocused ? "text-black" : "text-zinc-600"}
                 `}
               >
                 {t.bento.explore}_{collectionTitle.replace(/\s+/g, '_')} {'//'} {t.bento.enter} {'//'}
