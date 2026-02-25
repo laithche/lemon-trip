@@ -220,7 +220,7 @@ export const translations = {
       message: "Message",
       send: "ENVOYER_MESSAGE",
       success: "Message envoyé avec succès !",
-      errore: "ERREUR_ENVOI_MESSAGE",
+      error: "ERREUR_ENVOI_MESSAGE",
     },
   }
 };
