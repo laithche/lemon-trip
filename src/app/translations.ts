@@ -1,6 +1,6 @@
 export const translations = {
   it: {
-    nav: { home: "HOME", collections: "COLLEZIONI", viewAll: "[ VEDI TUTTE ]" },
+    nav: { home: "HOME", collections: "COLLEZIONI", viewAll: "[ VEDI TUTTE ]", lang: "SELEZIONA_LINGUA" },
     landing: {
       p1: "è un progetto creativo indipendente di abbigliamento",
       p2: "underground",
@@ -43,10 +43,20 @@ export const translations = {
         mat2: "· T-Shirt - materiali: 100% cotone (50% cotone riciclato - 50% cotone).",
         mat3: "Stampa grande sulla schiena e logo classico sul petto (lato sinistro)."
       }
-    }
+    },
+    contact: {
+      title: "CONTATTI",
+      subtitle: "Entra nel mondo Lemon Trip. Scrivici per collaborazioni, informazioni o semplicemente per dire la tua.",
+      email: "Email",
+      subject: "Oggetto",
+      message: "Messaggio",
+      send: "INVIA_MESSAGGIO",
+      success: "Messaggio inviato con successo!",
+      error: "ERRORE_INVIO_MESSAGGIO",
+    },
   },
   en: {
-    nav: { home: "HOME", collections: "COLLECTIONS", viewAll: "[ VIEW ALL ]" },
+    nav: { home: "HOME", collections: "COLLECTIONS", viewAll: "[ VIEW ALL ]", lang: "SELECT_LANGUAGE" },
     landing: {
       p1: "is an independent creative",
       p2: "underground",
@@ -89,10 +99,20 @@ export const translations = {
         mat2: "· T-Shirt - materials: 100% cotton (50% recycled cotton - 50% cotton).",
         mat3: "Large print on the back and classic logo on the chest (left side)."
       }
-    }
+    },
+    contact: {
+      title: "CONTACT",
+      subtitle: "Join the Lemon Trip world. Write to us for collaborations, info, or just to say hi.",
+      email: "Email",
+      subject: "Subject",
+      message: "Message",
+      send: "SEND_MESSAGE",
+      success: "Message sent successfully!",
+      error: "ERROR_SENDING_MESSAGE",
+    },
   },
   es: {
-    nav: { home: "HOME", collections: "COLECCIONES", viewAll: "[ VER TODAS ]" },
+    nav: { home: "HOME", collections: "COLECCIONES", viewAll: "[ VER TODAS ]", lang: "SELECCIONAR_IDIOMA" },
     landing: {
       p1: "es un proyecto creativo independiente de ropa",
       p2: "underground",
@@ -135,10 +155,20 @@ export const translations = {
         mat2: "· Camiseta - materiales: 100% algodón (50% algodón reciclado - 50% algodón).",
         mat3: "Impresión grande en la espalda y logotipo clásico en el pecho (lado izquierdo)."
       }
-    }
+    },
+    contact: {
+      title: "CONTACTO",
+      subtitle: "Entra en el mundo Lemon Trip. Escríbenos para colaboraciones, información o simplemente para saludar.",
+      email: "Email",
+      subject: "Asunto",
+      message: "Mensaje",
+      send: "ENVIAR_MENSAJE",
+      success: "¡Mensaje enviado con éxito!",
+      error: "ERROR_AL_ENVIAR_MENSAJE",
+    },
   },
   fr: {
-    nav: { home: "HOME", collections: "COLLECTIONS", viewAll: "[ VOIR TOUT ]" },
+    nav: { home: "HOME", collections: "COLLECTIONS", viewAll: "[ VOIR TOUT ]", lang: "SÉLECTIONNER_LANGUE" },
     landing: {
       p1: "est un projet créatif indépendant de vêtements",
       p2: "underground",
@@ -181,7 +211,17 @@ export const translations = {
         mat2: "· T-Shirt - matériaux : 100% coton (50% coton recyclé - 50% coton).",
         mat3: "Grande impression au dos et logo classique sur la poitrine (côté gauche)."
       }
-    }
+    },
+    contact: {
+      title: "CONTACT",
+      subtitle: "Rejoignez l'univers Lemon Trip. Écrivez-nous pour des collaborations, des infos, ou juste pour dire bonjour.",
+      email: "E-mail",
+      subject: "Objet",
+      message: "Message",
+      send: "ENVOYER_MESSAGE",
+      success: "Message envoyé avec succès !",
+      errore: "ERREUR_ENVOI_MESSAGE",
+    },
   }
 };
 

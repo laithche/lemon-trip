@@ -67,207 +67,196 @@ export default function NavBar() {
   if (pathname === "/") return null;
 
   return (
-    <nav className="sticky top-0 z-100 w-full">
-      <div className="relative w-full h-24 md:h-30 bg-zinc-900 border-b border-white/10 flex items-center justify-center">
-        
-        <NoiseOverlay />
+    <>
+      <nav className="sticky top-0 z-[100] w-full">
+        <div className="relative w-full h-24 md:h-30 bg-zinc-900 border-b border-white/10 flex items-center px-6 md:px-12">
+          
+          <NoiseOverlay />
 
-        <div className="absolute inset-0 z-60 pointer-events-none opacity-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]" />
-        
-        {/* layout desktop */}
-        <div className="hidden md:flex w-full items-center justify-center gap-24 font-mono text-[11px] uppercase tracking-[0.3em]">
-          <Link 
-            href="/" 
-            className="text-zinc-100 hover:text-[#C2F148] transition-colors shrink-0">
-            <span className="text-[#C2F148]">{"//"}</span>
-            HOME
-          </Link>
+          <div className="absolute inset-0 z-60 pointer-events-none opacity-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_2px,3px_100%]" />
 
-          <div className="shrink-0">
-            <Image
-              src="/icon.svg"
-              width={95}
-              height={95}
-              alt="logo Lemon Trip"
-              className="brightness-110" />
-          </div>
+          {/* layout desktop */}
+          <div className="hidden md:grid grid-cols-3 w-full items-center relative z-10 font-mono text-[11px] uppercase tracking-[0.3em]">
+            
+            {/* colonna sx */}
+            <div className="flex justify-end items-center gap-10">
+              <Link 
+                href="/" 
+                className={`transition-colors shrink-0 ${pathname === '/' ? 'text-[#C2F148]' : 'text-zinc-100 hover:text-[#C2F148]'}`}>
+                <span className="text-[#C2F148]">{"//"}</span> HOME
+              </Link>
 
-          {/* sezione collezioni */}
-          <div className="relative" ref={collRef}>
-            {pathname.split('/').length > 2 && pathname.includes('/collections/') ? (
-              /* dentro una collezione specifica -> MOSTRA DROPDOWN */
-              <>
+              <Link 
+                href="/contact" 
+                className={`transition-colors shrink-0 ${pathname === '/contact' ? 'text-[#C2F148]' : 'text-zinc-100 hover:text-[#C2F148]'}`}>
+                <span className="text-[#C2F148]">{"//"}</span> {t.contact.title}
+              </Link>
+            </div>
+
+            {/* colonna centro */}
+            <div className="flex justify-center items-center">
+              <Link href="/" className="shrink-0">
+                <Image
+                  src="/icon.svg"
+                  width={95}
+                  height={95}
+                  alt="logo Lemon Trip"
+                  className="brightness-110"
+                />
+              </Link>
+            </div>
+
+            {/* colonna dx */}
+            <div className="flex justify-between items-center gap-10">
+
+              {/* dropdown collezioni */}
+              <div className="relative" ref={collRef}>
+                {pathname.includes('/collections/') && pathname.split('/').length > 2 ? (
+                  <>
+                    <button 
+                      onClick={() => setIsCollOpen(!isCollOpen)}
+                      className="flex items-center gap-2 text-[#C2F148] font-bold">
+                      <span className="text-[#C2F148]">{"//"}</span> {t.nav.collections}
+                      <ChevronDown size={12} className={`transition-transform ${isCollOpen ? "rotate-180" : ""}`} />
+                    </button>
+
+                    {isCollOpen && (
+                      <div className="absolute top-[calc(100%+25px)] right-0 bg-zinc-900 border border-white/10 p-1 flex flex-col min-w-[200px] shadow-2xl z-[130]">
+                        <Link href="/collections" className="text-[9px] text-center py-3 border-b border-white/5 text-zinc-500 hover:text-white">[ {t.nav.viewAll} ]</Link>
+                        {collections.map((col) => (
+                          <Link key={col.slug} href={col.slug} className={`text-[9px] text-center py-4 hover:bg-white/5 ${pathname === col.slug ? "text-[#C2F148]" : "text-zinc-400"}`}>
+                            {col.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link href="/collections" className={`hover:text-[#C2F148] transition-colors ${pathname === '/collections' ? 'text-[#C2F148]' : 'text-zinc-100'}`}>
+                    <span className="text-[#C2F148]">{"//"}</span> {t.nav.collections}
+                  </Link>
+                )}
+              </div>
+
+              {/* selettore lingua */}
+              <div className="relative" ref={langRef}>
                 <button 
-                  onClick={() => setIsCollOpen(!isCollOpen)}
-                  className="flex items-center gap-2 text-[#C2F148] transition-colors font-bold">
-                  <span className="text-[#C2F148]">{"//"}</span>
-                  {t.nav.collections}
-                  <ChevronDown size={12} className={`transition-transform duration-300 ${isCollOpen ? "rotate-180" : ""}`} />
+                  onClick={() => setIsLangOpen(!isLangOpen)}
+                  className="flex items-center gap-2 text-zinc-400 hover:text-[#C2F148] border border-white/10 px-3 py-1.5 bg-black/40">
+                  {currentLang}
+                  <ChevronDown size={12} className={`${isLangOpen ? "rotate-180" : ""}`} />
                 </button>
 
-                {isCollOpen && (
-                  <div className="absolute top-[calc(100%+20px)] left-1/2 -translate-x-1/2 bg-zinc-900 border border-white/10 p-1 flex flex-col min-w-50 shadow-2xl animate-in fade-in zoom-in-95 duration-200 z-130">
-                    <Link 
-                      href="/collections"
-                      onClick={() => setIsCollOpen(false)}
-                      className="text-[9px] text-center py-3 border-b border-white/5 text-zinc-500 hover:text-white transition-colors">
-                      [ {t.nav.viewAll} ]
-                    </Link>
-                    {collections.map((col) => (
-                      <Link
-                        key={col.slug}
-                        href={col.slug}
-                        onClick={() => setIsCollOpen(false)}
-                        className={`text-[9px] text-center py-4 tracking-[0.2em] transition-all hover:bg-white/5 ${pathname === col.slug ? "text-[#C2F148] bg-white/5" : "text-zinc-400"}`}>
-                        {col.name}
-                      </Link>
+                {isLangOpen && (
+                  <div className="absolute top-full mt-2 right-0 bg-zinc-900 border border-white/10 p-1 flex flex-col min-w-[80px] shadow-2xl z-[130]">
+                    {languagesList.map((l) => (
+                      <button key={l.code} onClick={() => { setLanguage(l.code); setIsLangOpen(false); }} className={`text-[10px] py-2 hover:bg-white/5 ${language === l.code ? "text-[#C2F148]" : "text-zinc-500"}`}>
+                        {l.label}
+                      </button>
                     ))}
                   </div>
                 )}
-              </>
-            ) : (
-              /* dentro collections -> niente dropdown */
-              <Link 
-                href="/collections" 
-                className={`text-zinc-100 hover:text-[#C2F148] transition-colors shrink-0 ${pathname === '/collections' ? 'text-[#C2F148]' : ''}`}>
-                <span className="text-[#C2F148]">{"//"}</span>
-                {t.nav.collections}
-              </Link>
-            )}
-          </div>
-
-          {/* selettore lingua desktop */}
-          <div className="absolute right-10" ref={langRef}>
-            <button 
-              onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-2 font-mono text-[10px] text-zinc-400 hover:text-[#C2F148] transition-all border border-white/10 px-3 py-1.5 rounded-sm bg-black/40">
-              {currentLang}
-              <ChevronDown size={12} className={`transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {isLangOpen && (
-              <div className="absolute top-full mt-2 right-0 bg-zinc-900 border border-white/10 p-1 flex flex-col min-w-[80px] shadow-2xl z-[120]">
-                {languagesList.map((l) => (
-                  <button
-                    key={l.code}
-                    onClick={() => {
-                      setLanguage(l.code);
-                      setIsLangOpen(false);
-                    }}
-                    className={`text-[10px] text-center py-2 transition-colors hover:bg-white/5 ${language === l.code ? "text-[#C2F148] font-bold" : "text-zinc-500"}`}
-                  >
-                    {l.label}
-                  </button>
-                ))}
               </div>
-            )}
+            </div>
           </div>
-
-        </div>
 
         {/* layout mobile */}
-        <div className="flex md:hidden w-full items-center justify-between">
+          <div className="flex md:hidden w-full items-center justify-between relative z-10">
+            <button onClick={() => setIsOpen(true)} className="text-[#C2F148]">
+              <Menu size={28} />
+            </button>
 
-          <button onClick={() => setIsOpen(true)} className="text-[#C2F148]">
-            <Menu size={28} strokeWidth={1.5} />
-          </button>
-
-          <div className="absolute left-1/2 -translate-x-1/2">
-            <Image 
-              src="/icon.svg" 
-              width={90} 
-              height={90} 
-              alt="logo Lemon Trip" />
-          </div>
-
-          <div className="w-7" /> 
-        </div>
-
-        {/* sidebar */}
-        <div className={`fixed inset-0 z-110 bg-black/95 backdrop-blur-md transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
-        
-          <button 
-            onClick={() => setIsOpen(false)}
-            className="absolute top-6 right-6 text-[#C2F148]" >
-            <X size={32} strokeWidth={1.5} />
-          </button>
-
-          {/* link sidebar */}
-          <div className="flex flex-col h-full items-center justify-center gap-12 font-mono text-2xl tracking-[0.2em]">
-            <Link 
-              href="/" 
-              onClick={() => setIsOpen(false)}
-              className="text-zinc-500 active:text-[#C2F148]">
-              HOME
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+              <Image 
+                src="/icon.svg" 
+                width={80} 
+                height={80} 
+                alt="logo Lemon Trip" />
             </Link>
 
-            <div className="flex flex-col items-center gap-6">
-              <button 
-                onClick={() => setShowCollections(!showCollections)}
-                className={`text-2xl flex items-center gap-2 ${pathname.includes("/collections") ? "text-zinc-100" : "text-zinc-500"}`}>
-                {t.nav.collections}
-                <span className={`text-xs transition-transform duration-300 ${showCollections ? "rotate-180" : ""}`}>
-                  ▼
-                </span>
-              </button>
-
-              {/* menu tendina collezioni */}
-              <div className={`flex flex-col items-center gap-5 overflow-hidden transition-all duration-500 ${showCollections ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}`}>
-                
-                <Link 
-                  href="/collections"
-                  onClick={() => setIsOpen(false)}
-                  className={`text-[13px] tracking-[0.3em] ${pathname === "/collections" ? "text-[#C2F148] pointer-events-none" : "text-zinc-400"}`}>
-                  [ {t.nav.viewAll} ]
-                </Link>
-
-                {/* mappa delle collezioni */}
-                {collections.map((col) => {
-                  const isActive = pathname === col.slug;
-                  return (
-                    <Link
-                      key={col.slug}
-                      href={col.slug}
-                      onClick={(e) => {
-                        if (isActive) e.preventDefault(); //disabilita se siamo già lì
-                        setIsOpen(false);
-                      }}
-                      className={`text-[13px] tracking-[0.3em] transition-colors ${
-                        isActive 
-                          ? "text-[#C2F148] font-bold" //evidenziato e bloccato
-                          : "text-zinc-500 active:text-[#C2F148]"
-                      }`}>
-                      {isActive ? `> ${col.name} <` : col.name}
-                    </Link>
-                    );
-                })}
-              </div>
-            </div>
-            
-            {/* selettore lingua sidebar */}
-            <div className="flex flex-wrap justify-center gap-6 mb-8 font-mono text-xs px-10">
-              {languagesList.map((l, index) => (
-                <div key={l.code} className="flex items-center gap-3">
-                  <button 
-                    onClick={() => {
-                      setLanguage(l.code);
-                    }}
-                    className={`transition-all hover:text-[#C2F148] ${language === l.code ? "text-[#C2F148] font-bold" : "text-zinc-500"}`}
-                  >
-                    {l.label}
-                  </button>
-                  {index < languagesList.length - 1 && <span className="text-zinc-800">/</span>}
-                </div>
-              ))}
-            </div>
-                        
-            <div className="absolute bottom-10 text-[10px] text-zinc-700 tracking-[0.5em] uppercase">
-              Lemon Trip // 2026
-            </div>
+            <div className="w-7" /> 
           </div>
         </div>
+      </nav>
 
-      </div>
-    </nav>
+      {/* sidebar mobile */}
+      <div className={`fixed inset-0 h-screen w-screen z-[200] bg-black/80 backdrop-blur-xl transition-transform duration-500 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
+
+          <div className="absolute inset-0 z-[-1] opacity-20 pointer-events-none">
+            <NoiseOverlay />
+          </div>
+
+          <button onClick={() => setIsOpen(false)} className="absolute top-8 right-8 text-[#C2F148] z-[210]">
+            <X size={32} />
+          </button>
+
+          <div className="flex flex-col h-full items-center justify-center gap-8 font-mono uppercase tracking-[0.2em] relative z-10">
+            <Link 
+              href="/" 
+              onClick={() => setIsOpen(false)} 
+              className={`text-2xl ${pathname === "/" ? "text-[#C2F148]" : "text-zinc-500"}`}>
+                <span className="text-[#C2F148]">{"//"}</span> HOME
+            </Link>
+            
+            <Link 
+              href="/contact" 
+              onClick={() => setIsOpen(false)} 
+              className={`text-2xl ${pathname === "/contact" ? "text-[#C2F148]" : "text-zinc-500"}`}>
+                <span className="text-[#C2F148]">{"//"}</span> {t.contact.title}
+            </Link>
+              
+              <div className="flex flex-col items-center gap-4 py-4">
+                <button onClick={() => setShowCollections(!showCollections)} className={`text-2xl flex items-center gap-3 ${pathname.includes("/collections") ? "text-zinc-100" : "text-zinc-500"}`}>
+                  <span className="text-[#C2F148]">{"//"}</span> {t.nav.collections}
+                  <span className={`text-xs transition-transform ${showCollections ? "rotate-180" : ""}`}>▼</span>
+                </button>
+                
+                <div className={`flex flex-col items-center gap-5 overflow-hidden transition-all duration-500 ${showCollections ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}`}>
+                  
+                  <Link 
+                    href="/collections"
+                    onClick={() => setIsOpen(false)}
+                    className={`text-[13px] tracking-[0.3em] ${pathname === "/collections" ? "text-[#C2F148] pointer-events-none" : "text-zinc-400"}`}>
+                    [ {t.nav.viewAll} ]
+                  </Link>
+
+                  {/* mappa collezioni */}
+                  {collections.map((col) => {
+                    const isActive = pathname === col.slug;
+                    return (
+                      <Link
+                        key={col.slug}
+                        href={col.slug}
+                        onClick={(e) => {
+                          if (isActive) e.preventDefault(); //disabilita se siamo già lì
+                          setIsOpen(false);
+                        }}
+                        className={`text-[13px] tracking-[0.3em] transition-colors ${
+                          isActive 
+                            ? "text-[#C2F148] font-bold" //evidenziato e bloccato
+                            : "text-zinc-500 active:text-[#C2F148]"
+                        }`}>
+                        {isActive ? `> ${col.name} <` : col.name}
+                      </Link>
+                      );
+                  })}
+                </div>
+
+                <div className="mt-8 flex flex-col items-center gap-4">
+                  <span className="text-[9px] text-zinc-600 tracking-[0.4em]">
+                    {t.nav.lang}
+                  </span>
+                  <div className="flex items-center gap-5">
+                    {languagesList.map((l) => (
+                      <button key={l.code} onClick={() => setLanguage(l.code)} className={`text-sm ${language === l.code ? "text-[#C2F148]" : "text-zinc-600"}`}>
+                        {l.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </>
   );
 }
